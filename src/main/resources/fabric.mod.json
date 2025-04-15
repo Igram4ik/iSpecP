@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "ispecp",
+  "version": "${version}",
+  "name": "iSpecP",
+  "description": "Special plugin",
+  "authors": [ "Igram4ik" ],
+  "contact": {},
+  "license": "unlicense",
+  "icon": "assets/ispecp/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "dev.igrammine.smp.iSpecP"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
