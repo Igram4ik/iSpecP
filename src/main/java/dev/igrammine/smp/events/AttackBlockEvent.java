@@ -1,28 +1,20 @@
 package dev.igrammine.smp.events;
 
-import dev.igrammine.smp.commands.BlockCommand;
-import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
-import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-
-import java.util.concurrent.atomic.AtomicReference;
+import dev.igrammine.smp.data.ModStates;
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
 
 public class AttackBlockEvent {
 
     public void register() {
-        AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
-            var handStack = player.getMainHandStack();
-            var block = world.getBlockState(pos);
-            AtomicReference<ActionResult> result = new AtomicReference<>(ActionResult.PASS);
-
-            player.getGameProfile().getProperties().forEach((name, prop) -> {
-                if (player.getDataTracker().get(BlockCommand.key).equals(true) && !player.isSpectator() && !player.isCreative()) {
-                    player.sendMessage(Text.of("blocked"));
-                    result.set(ActionResult.SUCCESS);
-                }
-            });
-
-            return result.get();
+        PlayerBlockBreakEvents.BEFORE.register((world, player, pos, block, blockEntity) -> {
+            if (!player.isSpectator() && !player.isCreative()) {
+                NbtCompound retrievedData = ModStates.getPlayerDataState((ServerWorld) player.getWorld()).getPlayerData(player.getUuid());
+                var value = retrievedData.getBoolean("blocked");
+                return !value;
+            }
+            return true;
         });
     }
 }

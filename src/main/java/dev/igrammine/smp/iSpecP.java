@@ -15,8 +15,12 @@ public class iSpecP implements ModInitializer {
     public void onInitialize() {
         CommandRegistrationCallback.EVENT.register(
                 (dispatcher, registryAccess, environment) -> {
-                    new SpeedCommand().registerSpeedCommand(dispatcher, registryAccess);
-                    new BlockCommand().registerBlockCommand(dispatcher, registryAccess);
+                    try {
+                        new SpeedCommand().registerSpeedCommand(dispatcher, registryAccess);
+                        new BlockCommand().registerCommands(dispatcher, registryAccess);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
         );
 
