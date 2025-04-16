@@ -1,6 +1,7 @@
 package dev.igrammine.smp.mixin;
 
 import com.mojang.authlib.GameProfile;
+import dev.igrammine.smp.data.ModStates;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -49,10 +50,8 @@ public abstract class ArmorSlotsServerPlayerMixin {
                 if (slot == 5 && stack.getItem() == Registries.ITEM.get(Identifier.tryParse("minecraft:netherite_helmet"))) {
                     System.out.println("drop");
 
-
-                    if (((Object) this) instanceof Entity entity) {
-                        System.out.println("instanceof");
-
+                    if (ModStates.getPlayerDataState(world).getPlayerData(profile.getId()).getBoolean("blocked")) {
+                        world.getPlayerByUuid(profile.getId()).dropItem(stack, true, false);
                     }
                 }
             }
