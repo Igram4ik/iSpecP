@@ -7,7 +7,7 @@
   "authors": [ "Igram4ik" ],
   "contact": {},
   "license": "unlicense",
-  "icon": "assets/ispecp/icon.png",
+  "icon": "icon.png",
   "environment": "server",
   "entrypoints": {
     "main": [
@@ -18,8 +18,5 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}"
-  },
-  "mixins": [
-    "ispecp.mixins.json"
-  ]
+  }
 }

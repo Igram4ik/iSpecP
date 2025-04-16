@@ -1,9 +1,0 @@
-{
-  "required": true,
-  "package": "dev.igrammine.smp.mixin",
-  "mixins": [
-    "ArmorEquipPlayerEntityMixin",
-    "ArmorSlotsServerPlayerMixin",
-    "ServerPlayerEntityMixin"
-  ]
-}
